@@ -1,0 +1,61 @@
+<p>
+  usuario works!
+</p>
+<div class="col-12 md:flex">
+  
+  <div class="col-12 md:col-6">
+    <div class="card">
+      <h5>Formulario de Registro</h5>
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-12 md:col-6">
+          <label for="nombre">Nombre</label>
+          <input pInputText id="nombre" type="text" [(ngModel)]="usuario.nombre" placeholder="Ingrese su nombre" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="apellido">Apellido</label>
+          <input pInputText id="apellido" type="text" [(ngModel)]="usuario.apellido" placeholder="Ingrese su apellido" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="tipoDocumento">Tipo de Documento</label>
+          <p-dropdown id="tipoDocumento" [options]="tiposDocumento" optionLabel="label" [(ngModel)]="usuario.tipoDocumento" placeholder="Seleccione el tipo"></p-dropdown>
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="numeroDocumento">Número de Documento</label>
+          <input pInputText id="numeroDocumento" type="text" [(ngModel)]="usuario.numeroDocumento" placeholder="Ingrese su número de documento" />
+        </div>
+        <div class="field col-12">
+          <label for="correo">Correo Electrónico</label>
+          <input pInputText id="correo" type="email" [(ngModel)]="usuario.correo" placeholder="Ingrese su correo electrónico" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="usuario">Usuario</label>
+          <input pInputText id="usuario" type="text" [(ngModel)]="usuario.usuario" placeholder="Ingrese su usuario" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="contrasena">Contraseña</label>
+          <input pInputText id="contrasena" type="password" [(ngModel)]="usuario.contrasena" placeholder="Ingrese su contraseña" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="telefono">Teléfono</label>
+          <input pInputText id="telefono" type="text" [(ngModel)]="usuario.telefono" placeholder="Ingrese su teléfono" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="tipoCargo">Tipo de Cargo</label>
+          <p-dropdown id="tipoCargo" [options]="tiposCargo" optionLabel="label" [(ngModel)]="usuario.tipoCargo" placeholder="Seleccione el tipo"></p-dropdown>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button pButton label="Registrar" (click)="registrarUsuario()"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 md:col-6">
+    <div class="card">
+      <img src="../../../assets/cen/user.jpeg" alt="Descripción de la imagen" class="card-img-top" style="width: 100%; height:50%;">
+      <div class="card-body">
+      </div>
+    </div>
+  </div>
+  
+</div>

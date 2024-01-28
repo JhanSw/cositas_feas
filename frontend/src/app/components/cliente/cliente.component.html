@@ -1,0 +1,71 @@
+<!-- HTML completo con correcciones -->
+
+<p>
+  cliente works!
+</p>
+
+<div class="col-12 md:flex">
+  <div class="col-12 md:col-6">
+    <div class="form">
+      <form (ngSubmit)="guardarRegistro()">
+        <h5>Formulario de Cliente</h5>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-12 md:col-6">
+            <label for="nombreCliente">Nombre del Cliente</label>
+            <input pInputText id="cliente" type="text" [(ngModel)]="nuevoRegistro.cliente" placeholder="Ingrese el nombre del cliente" />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="nit">NIT</label>
+            <input pInputText id="nit" type="text" [(ngModel)]="nuevoRegistro.nit" placeholder="Ingrese el NIT" />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="solicitante">Solicitante</label>
+            <input pInputText id="solicitante" type="text" [(ngModel)]="nuevoRegistro.solicitante" placeholder="Ingrese el Solicitante" />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="cargo">Cargo</label>
+            <input pInputText id="cargo" type="text" [(ngModel)]="nuevoRegistro.cargo" placeholder="Ingrese el cargo" />
+          </div>
+          <div class="field col-12">
+            <label for="direccion">Dirección</label>
+            <input pInputText id="direccion" type="text" [(ngModel)]="nuevoRegistro.direccion" placeholder="Ingrese la dirección" />
+          </div>
+          <div class="field col-12 md-6">
+            <label for="municipio">Municipio</label>
+            <input pInputText id="municipio" type="text" [(ngModel)]="nuevoRegistro.municipio" placeholder="Ingrese el municipio" />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="telefono">Teléfono</label>
+            <input pInputText id="telefono" type="text" [(ngModel)]="nuevoRegistro.telefono" placeholder="Ingrese el teléfono" />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="fax">Fax</label>
+            <input pInputText id="fax" type="text" [(ngModel)]="nuevoRegistro.fax" placeholder="Ingrese el fax" />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="consecutivo">Consecutivo</label>
+            <input pInputText id="consecutivo" type="text" [(ngModel)]="nuevoRegistro.consecutivo" placeholder="Ingrese el consecutivo" />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="observaciones">Observaciones</label>
+            <input pInputText id="observaciones" type="text" [(ngModel)]="nuevoRegistro.observaciones" placeholder="Ingrese el teléfono" />
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <button pButton label="Registrar Cliente" type="submit"></button>
+        </div>
+        <div *ngIf="showSuccessMessage" class="text-center mt-2">
+          Cliente registrado
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 md:col-6">
+  <div class="card">
+    <img src="../../../assets/cen/uis.jpg" alt="Descripción de la imagen" class="card-img-top" style="width: 100%; height:50%;">
+    <div class="card-body">
+    </div>
+  </div>
+</div>

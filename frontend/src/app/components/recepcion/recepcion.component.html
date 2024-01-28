@@ -1,0 +1,229 @@
+<p>
+  recepcion works!
+</p>
+<div class="col-12 md:flex">
+
+    <div class="card">
+      <h5>Formulario de Recepción</h5>
+      <div class="p-fluid p-formgrid grid">
+
+        <div class="field col-12 md:col-3">
+          <label for="guia">Guía</label>
+          <input pInputText id="guia" type="text" [(ngModel)]="recepcion.guia" placeholder="Ingrese el número de guía" />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="nombreEntrega">Nombre de Entrega</label>
+          <input pInputText id="nombreEntrega" type="text" [(ngModel)]="recepcion.nombreEntrega" placeholder="Ingrese el nombre de entrega" />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="remitente">Remitente</label>
+          <input pInputText id="remitente" type="text" [(ngModel)]="recepcion.remitente" placeholder="Ingrese el remitente" />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="fechaEntrega">Fecha de Entrega</label>
+          <p-calendar id="fechaEntrega" [(ngModel)]="recepcion.fechaEntrega" [showTime]="false" placeholder="Seleccione la fecha"></p-calendar>
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="medio">Medio</label>
+          <input pInputText id="medio" type="text" [(ngModel)]="recepcion.medio" placeholder="Ingrese el medio" />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="embalaje">Embalaje</label>
+          <input pInputText id="embalaje" type="text" [(ngModel)]="recepcion.embalaje" placeholder="Ingrese el embalaje" />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="fechaEnvio">Fecha de Envío</label>
+          <p-calendar id="fechaEnvio" [(ngModel)]="recepcion.fechaEnvio" [showTime]="false" placeholder="Seleccione la fecha"></p-calendar>
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="fechaRecepcion">Fecha de Recepción</label>
+          <p-calendar id="fechaRecepcion" [(ngModel)]="recepcion.fechaRecepcion" [showTime]="false" placeholder="Seleccione la fecha"></p-calendar>
+        </div>
+      </div>
+
+
+        <h5>Datos del cliente</h5>
+        <div class="p-fluid p-formgrid grid">
+          
+          <div class="field col-12 md:col-6">
+            <label for="cliente">Cliente</label>
+            <p-dropdown [(ngModel)]="datosCliente.cliente" [options]="clientes" optionLabel="label" placeholder="Selecciona un cliente" (onChange)="cargarDatosCliente($event)"></p-dropdown>
+          </div>          
+          <div class="field col-12 md:col-6">
+            <label for="solicitante">Solicitante</label>
+            <p-dropdown [(ngModel)]="datosCliente.solicitante" [options]="solicitantes" optionLabel="label" placeholder="Selecciona un solicitante" (ngModelChange)="cargarDatosSolicitante()"></p-dropdown>
+          </div>          
+          <div class="field col-12 md:col-6">
+            <label for="nit">NIT</label>
+            <input pInputText id="nit" type="text" [(ngModel)]="datosCliente.nit" placeholder="NIT del cliente" disabled />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="cargo">Cargo</label>
+            <input pInputText id="cargo" type="text" [(ngModel)]="datosCliente.cargo" placeholder="Cargo del solicitante" disabled />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="direccion">Dirección</label>
+            <input pInputText id="direccion" type="text" [(ngModel)]="datosCliente.direccion" placeholder="Dirección del cliente" disabled />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="telefono">Teléfono</label>
+            <input pInputText id="telefono" type="text" [(ngModel)]="datosCliente.telefono" placeholder="Teléfono del cliente" disabled />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="consecutivo">Consecutivo</label>
+            <input pInputText id="consecutivo" type="text" [(ngModel)]="datosCliente.consecutivo" placeholder="Consecutivo" />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="municipio">Municipio</label>
+            <input pInputText id="municipio" type="text" [(ngModel)]="datosCliente.municipio" placeholder="Municipio" disabled />
+          </div>
+        
+      </div>
+
+      <h5>Criterios de Aceptacion</h5>
+      <div class="p-fluid p-formgrid grid">
+      
+      <div class="field col-12 md:col-6">
+
+        <div class="container mt-3">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Criterios</th>
+                <th>Cumplimiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> Cantidad de muestras  </td>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="cantidadMuestrasSi">
+                    <label class="form-check-label" for="cantidadMuestrasSi">Sí</label>
+                    <input class="form-check-input" type="checkbox" id="cantidadMuestrasNo">
+                    <label class="form-check-label" for="cantidadMuestrasNo">No</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td> Preservación   </td>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="preservacionSi">
+                    <label class="form-check-label" for="preservacionSi">Sí</label>
+                    <input class="form-check-input" type="checkbox" id="preservacionNo">
+                    <label class="form-check-label" for="preservacionNo">No</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Empaque</td>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="empaqueSi">
+                    <label class="form-check-label" for="empaqueSi">Sí</label>
+                    <input class="form-check-input" type="checkbox" id="empaqueNo">
+                    <label class="form-check-label" for="empaqueNo">No</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Embalaje</td>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="embalajeSi">
+                    <label class="form-check-label" for="embalajeSi">Sí</label>
+                    <input class="form-check-input" type="checkbox" id="embalajeNo">
+                    <label class="form-check-label" for="embalajeNo">No</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Identificación</td>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="identificacionSi">
+                    <label class="form-check-label" for="identificacionSi">Sí</label>
+                    <input class="form-check-input" type="checkbox" id="identificacionNo">
+                    <label class="form-check-label" for="identificacionNo">No</label>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+        <div class="field col-12 md:col-6">
+          <label for="observacionesCriterios">Observaciones - Criterios de Aceptabilidad</label>
+          <textarea pInputTextarea id="observacionesCriterios" rows="4" [(ngModel)]="recepcion.observacionesCriterios" placeholder="Ingrese las observaciones"></textarea>
+        </div>
+      </div>
+
+      <h5>Parámetros de Inspección</h5>
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-12 md:col-6">
+          <label for="analisisEnsayo">Análisis/Ensayo</label>
+          <p-dropdown [options]="analisisEnsayoOptions" [(ngModel)]="selectedAnalisisEnsayo" placeholder="Seleccionar"></p-dropdown>
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="analista">Analista</label>
+          <p-dropdown [options]="analistaOptions" [(ngModel)]="selectedAnalista" placeholder="Seleccionar"></p-dropdown>
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="equipo">Equipo</label>
+          <p-dropdown [options]="equipoOptions" [(ngModel)]="selectedEquipo" placeholder="Seleccionar"></p-dropdown>
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="empleado">Empleado</label>
+          <p-dropdown [options]="empleadoOptions" [(ngModel)]="selectedEmpleado" placeholder="Seleccionar"></p-dropdown>
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="muestraPreparacion">Preparación de Muestra</label>
+          <p-dropdown [options]="muestraPreparacionOptions" [(ngModel)]="selectedMuestraPreparacion" placeholder="Seleccionar"></p-dropdown>
+        </div>
+        
+        <!-- <div class="field col-12 md:col-3">
+          <label for="hora">Hora</label>
+          <input pInputText id="hora" type="text" [(ngModel)]="recepcion.hora" placeholder="Ingrese la hora" />
+        </div> -->
+
+        <div class="field col-12 md:col-6">
+          <label for="observacionesInspeccion">Observaciones - Parámetros de Inspección</label>
+          <textarea pInputTextarea id="observacionesInspeccion" rows="4" [(ngModel)]="recepcion.observacionesInspeccion" placeholder="Ingrese las observaciones"></textarea>
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="ordenTrabajo">Orden de Trabajo</label>
+          <input pInputText id="ordenTrabajo" type="text" [(ngModel)]="recepcion.ordenTrabajo" placeholder="Ingrese la orden de trabajo" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="consecutivo">Consecutivo</label>
+          <input pInputText id="consecutivo" type="text" [(ngModel)]="recepcion.consecutivo" placeholder="Ingrese el consecutivo" />
+        </div>
+      </div>
+
+      <h5>Aceptacion</h5>
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-12  ">
+          <label> <input type="checkbox" [(ngModel)]="seleccionadoSi" /> Sí</label>
+          <label> <input type="checkbox" [(ngModel)]="seleccionadoNo" /> No </label>
+        </div>
+        
+        <div class="field col-12 md:col-6">
+          <label for="motivo" >Motivo de Rechazo:</label>
+          <input pInputText id="motivo" type="text" [(ngModel)]="recepcion.motivo" placeholder="Ingrese el motivo"/>
+        </div>
+        
+        <div class="field col-12 md:col-6">
+          <label for="respuesta">Respuesta del Cliente Comentario:</label>
+          <input pInputText id="respuesta"type="text" [(ngModel)]="recepcion.respuesta" placeholder="Ingrese la respuesta"/>
+        </div>
+        
+        <div class="text-center mt-4">
+          <button pButton label="Registrar Recepción" (click)="registrarRecepcion()"></button>
+          <div *ngIf="showSuccessMessage">Recepcion registrada</div>
+        </div>
+      </div>
+
+    </div>
+  </div>

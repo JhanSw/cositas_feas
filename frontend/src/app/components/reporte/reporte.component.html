@@ -1,0 +1,26 @@
+<p>
+  reporte works!
+</p>
+  <div class="col-12 md:flex">
+    <div class="col-12 md:col-6">
+      <div class="card" style="margin: 20px; padding: 20px;">
+        <h5>Inicio de Sesión</h5>
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-12">
+            <label for="usuario">Usuario</label>
+            <input pInputText id="usuario" type="text" [(ngModel)]="usuario" placeholder="Ingrese su usuario" required />
+          </div>
+          <div class="field col-12">
+            <label for="contrasena">Contraseña</label>
+            <input pInputText id="contrasena" type="password" [(ngModel)]="contrasena" placeholder="Ingrese su contraseña" required />
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <button pButton label="Iniciar Sesión" (click)="iniciarSesion()" [disabled]="!usuario || !contrasena"></button>
+        </div>
+        <div *ngIf="showSuccessMessage" class="text-center mt-2">
+          Sesión iniciada
+        </div>
+      </div>
+    </div>
+  </div>
