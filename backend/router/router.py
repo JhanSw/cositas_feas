@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Response, Depends, HTTPException, status
 from starlette.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_401_UNAUTHORIZED
 from schema.user_schema import UserSchema, DataUser, ClienteSchema, EstadoSchema, CriteriosAceptabilidadSchema, DocumentoSchema, InspeccionSchema, RecepcionSchema
 from config.db import engine
@@ -14,8 +14,9 @@ from typing import List
 from fastapi import HTTPException
 from sqlalchemy import select, insert, update, delete
 from sqlalchemy.exc import SQLAlchemyError
-from datetime import date
-
+from datetime import date, datetime, timedelta
+from jose import jwt
+from passlib.context import CryptContext
 
  
 cliente_router = APIRouter()
@@ -77,6 +78,43 @@ def create_user(data_user: UserSchema):
 
     return Response(status_code=HTTP_201_CREATED)
  
+#Método Token
+SECRET_KEY = "your-secret-key"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+# Esta función crea el token JWT
+def create_access_token(data: dict, expires_delta: timedelta):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + expires_delta
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+@user.post("/api/user/login", status_code=200)
+def login_user(data_user: DataUser):
+    with engine.connect() as conn:
+        result = conn.execute(users.select().where(users.c.usuario == data_user.usuario)).first()
+        
+        if result is not None:
+            # Verificamos la contraseña
+            check_passw = check_password_hash(result[4], data_user.contrasenia_usuario)
+            if check_passw:
+                # Si las credenciales son válidas, creamos el token JWT
+                access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+                access_token = create_access_token(data={"username": result[1]}, expires_delta=access_token_expires)
+                return {
+                    "status": 200,
+                    "message": "Login exitoso",
+                    "access_token": access_token,
+                    "token_type": "bearer"
+                }
+        # Si las credenciales son inválidas, retornamos un error
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Credenciales inválidas",
+        )
+'''
 @user.post("/api/user/login", status_code=200)
 def login_user(data_user: DataUser):
     with engine.connect() as conn:
@@ -95,7 +133,7 @@ def login_user(data_user: DataUser):
             "status" : HTTP_401_UNAUTHORIZED,
             "message": "No perro, metiste mal los datos"
         }
-          
+'''         
 
 @user.put("/api/user/{user_id}", response_model=UserSchema)
 def update_user(data_update: UserSchema, user_id: str):
